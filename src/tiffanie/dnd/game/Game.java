@@ -25,6 +25,7 @@ public class Game {
     }
 
     public void initBoard(int characterPosition, Character character) {
+        board.add(new StartCell());
         board.add(new EmptyCell());
         board.add(new EnemyCell());
         board.add(new WeaponCell());
@@ -39,18 +40,12 @@ public class Game {
             while (!checkWin()) {
                 loop();
             }
-            //print(characterPosition);
             System.out.println("You won !");
         }
     }
 
     public void moveCharacter(int move) {
-        Cell currentCell = board.get(characterPosition);
         characterPosition += move;
-        //if (characterPosition >= board.size()) {
-        //    characterPosition;
-        // }
-        //System.out.println(currentCell.toString());
         print(characterPosition);
     }
 
@@ -59,68 +54,25 @@ public class Game {
     }
 
     public void initGame(String type, String name) {
-        new ArrayList<>(4);
+        new ArrayList<>(5);
         if (type.equals("Warrior")) {
             character = new Warrior(name);
         } else {
             character = new Wizard(name);
         }
         initBoard(0, character);
+        print(characterPosition);
     }
 
 
     public void loop() {
-        System.out.print(board.get(characterPosition));
         int roll = dice.roll(1);
         moveCharacter(roll);
-        //  this.scanner.nextLine();
+        //this.scanner.nextLine();
 
     }
 
     public boolean checkWin() {
-        return characterPosition >= board.size()-1;
+        return characterPosition >= board.size() - 1;
     }
 }
-
-/*
-public class Board {
-
-    private int characterPosition;
-    private ArrayList<Cell> cells;
-
-    public Board() {
-        cells = new ArrayList<>();
-    }
-
-    public Object getCell(int index) {
-        return cells.get(index);
-    }
-
-
-    public void setCell(int index, Object cell) {
-        cells.add(new EmptyCell());
-        cells.add(new EnemyCell());
-        cells.add(new WeaponCell());
-        cells.add(new PotionCell());
-    }
-
-    public void moveCharacter(int move) {
-        Object character = getCell(characterPosition);
-        setCell(characterPosition, null);
-        characterPosition += move;
-        if (characterPosition >= cells.size()) {
-            characterPosition = cells.size() - 1;
-        }
-        setCell(characterPosition, character);
-    }
-
-    public void print() {
-        for (int i = 0; i < cells.size(); i++) {
-            if (cells.get(i) == null) {
-                System.out.print(".");
-            } else {
-                System.out.print(cells.get(i));
-            }
-        }
-        System.out.println();
-    } */
