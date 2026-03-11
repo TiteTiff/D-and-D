@@ -17,6 +17,7 @@ public class Main {
         System.out.println("Salut");
         Scanner scanner = new Scanner(System.in);
         Game game = new Game(new Menu(scanner), new Dice(), scanner);
+        game.startGame();
         Weapon sword = new Weapon("Weapon", "sword", 5);
         Weapon mace = new Weapon("Weapon", "mace", 3);
         Spell fireball = new Spell("Spell", "fireball", 7);

@@ -18,23 +18,17 @@ public class Game {
     private int characterPosition;
 
     public Game(Menu menu, Dice dice, Scanner scanner) {
-        this.characterPosition = -1;
         this.menu = menu;
         this.dice = dice;
         this.board = new ArrayList<>();
         this.scanner = scanner;
-        initBoard(characterPosition, character);
     }
 
     public void initBoard(int characterPosition, Character character) {
-        board.add((new EmptyCell()));
+        board.add(new EmptyCell());
         board.add(new EnemyCell());
         board.add(new WeaponCell());
         board.add(new PotionCell());
-    }
-
-    public ArrayList<Cell> getBoard(int characterPosition) {
-        return board;
     }
 
     public void startGame() {
@@ -45,29 +39,23 @@ public class Game {
             while (!checkWin()) {
                 loop();
             }
-            print();
+            //print(characterPosition);
             System.out.println("You won !");
         }
     }
 
     public void moveCharacter(int move) {
-        initBoard(characterPosition, character);
         Cell currentCell = board.get(characterPosition);
         characterPosition += move;
-        if (characterPosition >= board.size()) {
-            characterPosition = board.size() - 1;
-        }
-        System.out.println(currentCell.toString());
+        //if (characterPosition >= board.size()) {
+        //    characterPosition;
+        // }
+        //System.out.println(currentCell.toString());
+        print(characterPosition);
     }
 
-    public void print() {
-        for (int i = 0; i < board.size(); i++) {
-            if (board.get(i) == null) {
-                System.out.print(".");
-            } else {
-                System.out.print(board.get(i));
-            }
-        }
+    public void print(int characterPosition) {
+        System.out.print(board.get(characterPosition));
     }
 
     public void initGame(String type, String name) {
@@ -82,15 +70,16 @@ public class Game {
 
 
     public void loop() {
-        System.out.print(board.get(int index));
+        System.out.print(board.get(characterPosition));
         int roll = dice.roll(1);
         moveCharacter(roll);
-        this.scanner.nextLine();
+        //  this.scanner.nextLine();
 
     }
 
-    public boolean checkWin() {return getBoard(4) == character;}
-
+    public boolean checkWin() {
+        return characterPosition >= board.size()-1;
+    }
 }
 
 /*
